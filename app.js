@@ -10,7 +10,7 @@ const coffeeParameters = {
     grindSize: ["coarse", "medium-fine", "medium-coarse", "super-coarse"],
     coffeeWaterRatio: ["60g to 100g", "75g to 100g"],
     bloomLength: ["0", "20", "30"],
-    brewTime: [5, 4, 6],
+    brewTime: [5, 4, 6, 7,8,10],
     temperature: ["boiling", "80", "90"],
     additionalSteps: [0,"Use filter on your press"],
     stirCrustTime: [0, 0.5]
