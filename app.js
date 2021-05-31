@@ -8,7 +8,7 @@ function renderMainPage() {
 
 const coffeeParameters = {
     grindSize: ["coarse", "medium-fine", "medium-coarse", "super-coarse"],
-    coffeeWaterRatio: ["60g to 100g", "75g to 100g"],
+    coffeeWaterRatio: ["6g to 100g", "7.5g to 100g"],
     bloomLength: ["0", "20", "30"],
     brewTime: [5, 4, 6, 7,8,10],
     temperature: ["boiling", "80", "90"],
