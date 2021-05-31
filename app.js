@@ -1,10 +1,3 @@
-function renderMainPage() {
-    const appTag = document.getElementById("app");
-    const html = "dupa";
-    appTag.innerHTML = html;
-}
-
-
 
 const coffeeParameters = {
     grindSize: ["coarse", "medium-fine", "medium-coarse", "super-coarse"],
