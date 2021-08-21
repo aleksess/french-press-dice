@@ -17,7 +17,7 @@
             <button id="rollBtn" x-on:click="generateRecipe">Let's roll</button>
         </div>
         <div id="list-wrap">
-            <template x-if="steps.length > 0">
+            <template x-if="steps && steps.length > 0">
                 <ol>
                     <template x-for="step in steps" >
                         <li x-text="step"></li>
