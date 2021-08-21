@@ -6,20 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>French press dice</title>
     <link href="styles.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
 <body>
-    <div id="app">
+    <div id="app" x-data="app">
         <div id="header">
             <h1>French press dice</h1>
             <img src="./french-press.svg" alt="french-press">
-            <button id="rollBtn">Let's roll</button>
+            <button id="rollBtn" x-on:click="generateRecipe">Let's roll</button>
         </div>
         <div id="list-wrap">
+            <template x-if="steps.length > 0">
+                <ol>
+                    <template >
+                        <li x-for="step in steps" x-text="step"></li>
 
+                </ol>
+            </template>
+            
         </div>
         
     </div>
     <footer> Built by <a href="https://github.com/aleksess">aleksess</a> | Inspired by <a href="https://www.youtube.com/watch?v=SHdXC_88_2g">James Hoffman's Aeropress Dice</a> and <a href="https://thewinniewu.github.io/aeropress-dice/">thewinniewu's app</a> | <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> </footer>
-    <script src="app.js"></script>
+    <script>
+        document.addEventListener("alpine:init", () => {
+            Alpine.data('app', () => ({
+                steps: null,
+                coffeeParameters: {
+                    grindSize: ["coarse", "medium-fine", "medium-coarse", "super-coarse"],
+                    coffeeWaterRatio: ["6g to 100g", "7.5g to 100g"],
+                    bloomLength: ["0", "20", "30"],
+                    brewTime: [5, 4, 6, 7,8,10],
+                    temperature: ["boiling", "80", "90"],
+                    additionalSteps: [0,"Use filter on your press"],
+                    stirCrustTime: [0, 0.5]
+                },
+                generateRecipe() {
+                    const steps = [];
+                    const {grindSize, coffeeWaterRatio, temperature, bloomLength, brewTime, stirCrustTime} = this.coffeeParameters;
+                    steps.push(`Grind size: ${grindSize[Math.floor(Math.random()*grindSize.length)]}`);
+                    steps.push(`Coffee to water ratio: ${coffeeWaterRatio[Math.floor(Math.random()*coffeeWaterRatio.length)]}`);
+                    const temperatureInfo = temperature[Math.floor(Math.random()* temperature.length)];
+                    steps.push(
+                        temperatureInfo === "boiling" ? 
+                        "For brewing use boiling water" :
+                        `Brew with water with temperature ${temperatureInfo} celsius degrees`
+                    );
+                    const bloomTime = bloomLength[Math.floor(Math.random()* bloomLength.length)];
+                    if (bloomTime !== "0") {
+                        steps.push(`Bloom length: ${bloomTime} s.`)
+                    }
+
+                    const brewingTime = brewTime[Math.floor(Math.random()*brewTime.length)]
+                    steps.push(`Brew time: ${brewingTime} minutes`);
+                    const stirCrust = stirCrustTime[Math.floor(Math.random()*stirCrustTime.length)];
+                    if (stirCrust !== 0) {
+                        steps.push(`Stir the crust after ${stirCrust * brewingTime} minute(s) of brewing time`);
+                    }
+
+
+                    this.steps = steps;
+                }
+        }))
+        })
+
+    </script>
 </body>
 </html>
